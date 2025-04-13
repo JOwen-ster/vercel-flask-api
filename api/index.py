@@ -8,8 +8,8 @@ db = {
     3: 'user_name_3',
 }
 
-# default GET
-@app.route('/')
+# defaults to GET method if methods are not specified
+@app.route('/', methods=['GET'])
 def home():
     return jsonify('index')
 
@@ -17,6 +17,7 @@ def home():
 @app.route('/post', methods=['POST'])
 def post_user():
     # Get query parameters
+    # # /post?id=1&name=example
     user_id = request.args.get('id')
     name = request.args.get('name')
 
