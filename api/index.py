@@ -1,6 +1,7 @@
 from flask import Flask, request, jsonify
 app = Flask(__name__)
 
+
 db = {
     1: 'user_name_1',
     2: 'user_name_2',
@@ -15,19 +16,20 @@ def home():
 
 @app.route('/post', methods=['POST'])
 def post_user():
-    data = request.get_json()  # Get JSON body of the request
+    # Get query parameters
+    user_id = request.args.get('id')
+    name = request.args.get('name')
 
-    if not data or 'id' not in data or 'name' not in data:
-        return jsonify({'error': 'Missing "id" or "name" in JSON body'}), 400
-
-    user_id = data['id']
-    name = data['name']
+    # Check if the parameters are provided
+    if not user_id or not name:
+        return jsonify({'error': 'Missing "id" or "name" in query parameters'}), 400
 
     try:
-        user_id = int(user_id)
+        user_id = int(user_id)  # Ensure the id is an integer
     except ValueError:
         return jsonify({'error': '"id" must be an integer'}), 400
 
+    # Add to the database
     db[user_id] = name
 
     return jsonify({'message': f'User "{name}" added with ID {user_id}'})
@@ -35,14 +37,12 @@ def post_user():
 
 @app.route('/delete', methods=['DELETE'])
 def delete():
-    data = request.get_json()  # Get JSON body of the request
-    if not data or 'id' not in data:
-        return jsonify({'error': 'Missing user ID in JSON body'}), 400
-
-    user_id = data['id']
+    data = request.args.get('id')
+    if not data:
+        return jsonify({'error': 'Missing user ID'}), 400
 
     try:
-        user_id = int(user_id)
+        user_id = int(data)
     except ValueError:
         return jsonify({'error': 'Invalid ID format'}), 400
 
