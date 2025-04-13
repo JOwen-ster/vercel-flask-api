@@ -11,7 +11,7 @@ db = {
 # defaults to GET method if methods are not specified
 @app.route('/')
 def home():
-    return jsonify('index')
+    return 'hello world'
 
 
 @app.route('/api/get', methods=['GET'])
