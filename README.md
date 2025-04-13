@@ -14,3 +14,5 @@ def post_user():
     # Handle the data...
     return jsonify({'message': f'User "{name}" added with ID {user_id}'})
 ```
+
+- Need to add templates to render site so the site has a frontend and an api
