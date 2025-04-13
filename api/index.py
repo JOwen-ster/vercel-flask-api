@@ -9,9 +9,7 @@ db = {
 }
 
 # defaults to GET method if methods are not specified
-# specify many routes for 1 function
 @app.route('/')
-@app.route('index')
 def home():
     return jsonify('index')
 
