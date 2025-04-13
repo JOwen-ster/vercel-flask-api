@@ -16,3 +16,19 @@ def post_user():
 ```
 
 - Need to add templates to render site so the site has a frontend and an api
+```python
+from flask import Flask, redirect, url_for, render_template
+
+# Our Flask app object
+app = Flask(__name__, template_folder='../templates',
+            static_folder='../static')
+
+@app.route('/')
+@app.route('/home')
+def index():
+    """Our default routes of '/' and '/home'
+
+    Return: landing page
+    """
+
+    return render_template('index.html')
