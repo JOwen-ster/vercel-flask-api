@@ -10,17 +10,18 @@ db = {
 
 # defaults to GET method if methods are not specified
 @app.route('/')
-def home():
-    return 'hello world'
+@app.route('/index')
+def index():
+    return jsonify({'content':'index'})
 
 
 @app.route('/api/get', methods=['GET'])
-def home():
+def get():
     return jsonify({'content':'hello world'})
 
 
 @app.route('/api/post', methods=['POST'])
-def post_user():
+def post():
     # Get query parameters
     # # /post?id=1&name=example
     user_id = request.args.get('id')
