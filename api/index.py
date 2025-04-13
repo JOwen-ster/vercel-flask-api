@@ -36,7 +36,7 @@ def post_user():
     return jsonify({'message': f'User "{name}" added with ID {user_id}'})
 
 
-@app.route('/delete', methods=['DELETE'])
+@app.route('/api/delete', methods=['DELETE'])
 def delete():
     data = request.args.get('id')
     if not data:
