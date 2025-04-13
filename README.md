@@ -1,6 +1,6 @@
 # vercel-flask-api
 
-- Need to add get_json as another way to get data if the data is NOT being passed as a query in the url
+- Need to add request.get_json() to access JSON data in the body as another way to get data if the data is NOT being passed as a query in the url
 
 ```python
 @app.route('/post', methods=['POST'])
