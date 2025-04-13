@@ -9,12 +9,19 @@ db = {
 }
 
 # defaults to GET method if methods are not specified
-@app.route('/', methods=['GET'])
+# specify many routes for 1 function
+@app.route('/')
+@app.route('index')
 def home():
     return jsonify('index')
 
 
-@app.route('/post', methods=['POST'])
+@app.route('/api/get', methods=['GET'])
+def home():
+    return jsonify({'content':'hello world'})
+
+
+@app.route('/api/post', methods=['POST'])
 def post_user():
     # Get query parameters
     # # /post?id=1&name=example
@@ -33,7 +40,7 @@ def post_user():
     # Add to the database
     db[user_id] = name
 
-    return jsonify({'message': f'User "{name}" added with ID {user_id}'})
+    return jsonify({'content': f'User "{name}" added with ID {user_id}'})
 
 
 @app.route('/api/delete', methods=['DELETE'])
@@ -49,6 +56,7 @@ def delete():
 
     if user_id in db:
         deleted_user = db.pop(user_id)
-        return jsonify({'message': f'User "{deleted_user}" deleted successfully'})
+        print(deleted_user)
+        return jsonify({'content': f'User "{deleted_user}" deleted successfully'})
     else:
         return jsonify({'error': 'User not found'}), 404
