@@ -32,3 +32,6 @@ def index():
     """
 
     return render_template('index.html')
+```
+
+https://www.youtube.com/watch?v=jQjjqEjZK58
